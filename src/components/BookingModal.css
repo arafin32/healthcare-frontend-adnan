@@ -1,0 +1,10 @@
+/* src/components/BookingModal.css */
+.time-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.time-slot {
+  padding: 8px 4px; border: 1.5px solid var(--border); border-radius: var(--r);
+  background: var(--white); font-size: 13px; font-family: var(--font-body);
+  font-weight: 500; color: var(--text-body); cursor: pointer; transition: all .15s;
+  text-align: center;
+}
+.time-slot:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-pale); }
+.time-slot.selected { border-color: var(--teal); background: var(--teal); color: #fff; font-weight: 700; }

@@ -1,0 +1,42 @@
+/* src/pages/HomePage.css */
+.home { min-height:100vh; }
+
+.home-nav { background:var(--white); border-bottom:1px solid var(--border); position:sticky;top:0;z-index:100; }
+.home-nav-inner { display:flex;align-items:center;justify-content:space-between;height:60px; }
+.home-logo { display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--navy); }
+.home-logo span { color:var(--navy); }
+
+/* Hero */
+.home-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #0F4C81 60%, var(--teal-dark) 100%);
+  padding: 80px 0 60px; position:relative; overflow:hidden;
+}
+.home-hero .container { position:relative;z-index:1; }
+.hero-tag { display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);padding:6px 14px;border-radius:var(--r-full);font-size:13px;font-weight:600;margin-bottom:18px;border:1px solid rgba(255,255,255,.15); }
+.hero-h1 { font-family:var(--font-display);font-size:54px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px; }
+.hero-h1 em { color:#6EE7B7;font-style:normal; }
+.hero-p { font-size:17px;color:rgba(255,255,255,.75);max-width:540px;line-height:1.7;margin-bottom:32px; }
+
+/* Floating cards */
+.hero-float-cards { display:flex;flex-wrap:wrap;gap:10px;margin-top:40px;max-width:540px; }
+.float-card { display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:var(--r);padding:10px 14px;color:#fff; }
+
+/* Features */
+.home-features { padding:80px 0;background:var(--white); }
+.feature-tile { padding:24px;border-radius:var(--r-lg);border:1px solid var(--border);transition:box-shadow .18s,transform .18s; }
+.feature-tile:hover { box-shadow:var(--shadow-md);transform:translateY(-3px); }
+.ft-icon { width:46px;height:46px;border-radius:var(--r);background:color-mix(in srgb, var(--ftc) 15%, white);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px; }
+.ft-title { font-size:15px;font-weight:700;font-family:var(--font-display);margin-bottom:7px; }
+.ft-desc { font-size:13.5px;color:var(--text-muted);line-height:1.6; }
+
+/* Roles */
+.home-roles { padding:70px 0;background:var(--surface); }
+.role-tile { border-radius:var(--r-lg);padding:28px; }
+
+/* CTA */
+.home-cta { background:linear-gradient(135deg,var(--teal-dark),var(--navy));padding:70px 0; }
+
+@media(max-width:768px){
+  .hero-h1 { font-size:36px; }
+  .hero-float-cards { display:none; }
+}

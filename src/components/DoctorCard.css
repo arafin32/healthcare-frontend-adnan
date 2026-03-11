@@ -1,0 +1,15 @@
+/* src/components/DoctorCard.css */
+.doctor-card {
+  background: var(--white); border-radius: var(--r-lg); border: 1px solid var(--border);
+  padding: 18px; display: flex; gap: 14px;
+  transition: box-shadow .18s, transform .18s;
+}
+.doctor-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.dc-avatar { width: 52px; height: 52px; border-radius: 50%; color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dc-body { flex: 1; min-width: 0; }
+.dc-name { font-size: 15px; font-weight: 700; font-family: var(--font-display); color: var(--text-primary); margin-bottom: 5px; }
+.dc-spec { display: inline-block; padding: 3px 10px; border-radius: var(--r-full); font-size: 12px; font-weight: 700; margin-bottom: 7px; }
+.dc-detail { font-size: 12.5px; color: var(--text-muted); margin-bottom: 3px; }
+.dc-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 8px; flex-wrap: wrap; }
+.avail-yes { font-size: 12px; font-weight: 600; color: var(--green); }
+.avail-no  { font-size: 12px; font-weight: 600; color: var(--rose); }

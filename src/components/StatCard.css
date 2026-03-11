@@ -1,0 +1,18 @@
+/* src/components/StatCard.css */
+.stat-card {
+  background: var(--white); border-radius: var(--r-lg); border: 1px solid var(--border);
+  padding: 20px; display: flex; align-items: flex-start; gap: 14px;
+  transition: box-shadow .18s, transform .18s;
+}
+.stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.stat-icon { font-size: 28px; width: 48px; height: 48px; border-radius: var(--r); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.stat-teal   .stat-icon { background: var(--teal-light);   }
+.stat-amber  .stat-icon { background: var(--amber-light);  }
+.stat-rose   .stat-icon { background: var(--rose-light);   }
+.stat-green  .stat-icon { background: var(--green-light);  }
+.stat-purple .stat-icon { background: var(--purple-light); }
+.stat-sky    .stat-icon { background: var(--sky-light);    }
+.stat-body { flex: 1; }
+.stat-value { font-size: 26px; font-weight: 800; font-family: var(--font-display); color: var(--text-primary); line-height: 1.1; margin-bottom: 4px; }
+.stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+.stat-sub   { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
