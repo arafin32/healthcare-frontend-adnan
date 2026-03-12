@@ -1,104 +1,196 @@
-// src/pages/HomePage.js
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import './HomePage.css';
+// src/pages/HomePage.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { Button } from "../components/ui/Button";
+import { Card, CardContent } from "../components/ui/Card";
+import { Avatar, AvatarFallback } from "../components/ui/Avatar";
+import { Users, Stethoscope, Activity, FileText } from "lucide-react";
 
 export default function HomePage() {
   const { user } = useAuth();
 
+  const services = [
+    { title: "Executive Health Package", icon: <Activity className="w-8 h-8 text-blue-600" /> },
+    { title: "Home Collection Services", icon: <Stethoscope className="w-8 h-8 text-green-600" /> },
+    { title: "All Doctors", icon: <Users className="w-8 h-8 text-purple-600" /> },
+    { title: "All Tests", icon: <FileText className="w-8 h-8 text-red-600" /> },
+  ];
+
+  const doctors = [
+    { name: "Dr. Sajib Chowdhury", dept: "Medicine" },
+    { name: "Prof. Ghulam Kawser", dept: "Neuromedicine" },
+    { name: "Dr. Panchanan Acharjee", dept: "Psychiatry" },
+    { name: "Dr. Md. Nasim Uddin", dept: "Cardiology" },
+  ];
+
+  const testimonials = [
+    { name: "Rahim Ahmed", text: "Very professional doctors and the online report system is extremely convenient." },
+    { name: "Fatema Khan", text: "Booking appointments online saved me a lot of time." },
+    { name: "Mahmud Hasan", text: "Great healthcare platform with trusted doctors." },
+  ];
+
   return (
-    <div className="home">
-      <nav className="home-nav">
-        <div className="container home-nav-inner">
-          <div className="home-logo">🏥 <span>HealthCare+</span></div>
-          <div style={{display:'flex',gap:12,alignItems:'center'}}>
-            {user
-              ? <Link to={`/${user.role}/dashboard`} className="btn btn-primary btn-sm">Go to Dashboard →</Link>
-              : <><Link to="/login" className="btn btn-ghost btn-sm">Sign In</Link><Link to="/register" className="btn btn-primary btn-sm">Get Started</Link></>
-            }
-          </div>
-        </div>
-      </nav>
+    <div className="font-sans text-gray-800">
 
-      {/* Hero */}
-      <section className="home-hero">
-        <div className="container">
-          <div className="hero-tag">🏥 Comprehensive Healthcare Platform</div>
-          <h1 className="hero-h1">Your health,<br/><em>fully managed.</em></h1>
-          <p className="hero-p">Book appointments with top doctors, track your vitals, view lab results, manage prescriptions — all in one secure, easy-to-use platform.</p>
-          <div style={{display:'flex',gap:14,flexWrap:'wrap'}}>
-            <Link to="/register" className="btn btn-primary btn-lg">Start for Free →</Link>
-            <Link to="/login" className="btn" style={{background:'rgba(255,255,255,.15)',color:'#fff',backdropFilter:'blur(8px)'}}>Sign In</Link>
-          </div>
-        </div>
-        <div className="hero-float-cards">
-          {[{icon:'📅',t:'Appointments',d:'Book in seconds'},{icon:'💊',t:'Prescriptions',d:'Track digitally'},{icon:'📊',t:'Health Metrics',d:'Monitor trends'},{icon:'🧪',t:'Lab Results',d:'View securely'}].map(c=>(
-            <div key={c.t} className="float-card">
-              <span style={{fontSize:22}}>{c.icon}</span>
-              <div><div style={{fontWeight:700,fontSize:13}}>{c.t}</div><div style={{fontSize:11.5,opacity:.7}}>{c.d}</div></div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="home-features">
-        <div className="container">
-          <div style={{textAlign:'center',marginBottom:48}}>
-            <h2 style={{fontSize:32,fontWeight:800,fontFamily:'var(--font-display)',marginBottom:10}}>Everything you need</h2>
-            <p style={{color:'var(--text-muted)',fontSize:15}}>For patients, doctors, and administrators — in one place.</p>
-          </div>
-          <div className="grid-3" style={{gap:24}}>
-            {[
-              { icon:'🔍', color:'var(--teal)',    title:'Find Doctors',          desc:'Search by name or specialization. View qualifications and book instantly.' },
-              { icon:'📅', color:'var(--sky)',     title:'Book Appointments',     desc:'Pick your preferred date and time slot. Get instant confirmation.' },
-              { icon:'💊', color:'var(--purple)',  title:'Digital Prescriptions', desc:'Doctors create digital prescriptions. Patients access them anytime.' },
-              { icon:'📊', color:'var(--amber)',   title:'Health Monitoring',     desc:'Track BMI, blood pressure, heart rate. See trends with charts.' },
-              { icon:'🧪', color:'var(--green)',   title:'Lab Results',           desc:'Lab results uploaded by your doctor. View and download securely.' },
-              { icon:'⏰', color:'var(--rose)',    title:'Medication Reminders',  desc:'Set your medication schedule. Never miss a dose.' },
-              { icon:'🖼️', color:'var(--navy)',   title:'Medical Images',        desc:'Upload X-rays, MRIs, CT scans. Doctors can view and annotate.' },
-              { icon:'👥', color:'var(--teal)',    title:'Admin Control',         desc:'Full user management, analytics, and role-based access control.' },
-              { icon:'🔒', color:'var(--sky)',     title:'Secure & Private',      desc:'JWT authentication, encrypted data, role-based permissions.' },
-            ].map(f=>(
-              <div key={f.title} className="feature-tile">
-                <div className="ft-icon" style={{'--ftc':f.color}}>{f.icon}</div>
-                <h3 className="ft-title">{f.title}</h3>
-                <p className="ft-desc">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Roles */}
-      <section className="home-roles">
-        <div className="container">
-          <h2 style={{fontSize:28,fontWeight:800,fontFamily:'var(--font-display)',marginBottom:28,textAlign:'center'}}>Built for every role</h2>
-          <div className="grid-3" style={{gap:20}}>
-            {[
-              { role:'Patient', icon:'🧑‍⚕️', color:'var(--teal-pale)', border:'var(--teal-light)', items:['Search & book doctors','View appointments & history','Access prescriptions & lab results','Track health metrics & vitals','Manage medications & reminders','Upload medical images'] },
-              { role:'Doctor',  icon:'👨‍⚕️', color:'#EFF6FF',         border:'#BAE6FD',           items:['View today\'s appointments','Confirm or complete appointments','Access patient records','Create digital prescriptions','Manage patient list','Professional profile'] },
-              { role:'Admin',   icon:'⚙️',  color:'var(--purple-light)', border:'#C4B5FD',         items:['System-wide analytics','User management & roles','Activate/deactivate accounts','View appointment statistics','Monitor platform health','Full audit control'] },
-            ].map(r=>(
-              <div key={r.role} className="role-tile" style={{background:r.color,border:`1px solid ${r.border}`}}>
-                <div style={{fontSize:36,marginBottom:10}}>{r.icon}</div>
-                <h3 style={{fontSize:18,fontWeight:800,fontFamily:'var(--font-display)',marginBottom:14}}>{r.role}</h3>
-                {r.items.map(i=><div key={i} style={{fontSize:13,color:'var(--text-body)',padding:'5px 0',borderBottom:'1px solid rgba(0,0,0,.06)',display:'flex',gap:8}}><span style={{color:'var(--teal)',flexShrink:0}}>✓</span>{i}</div>)}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="home-cta">
-        <div className="container" style={{textAlign:'center'}}>
-          <h2 style={{fontSize:32,fontWeight:800,fontFamily:'var(--font-display)',color:'#fff',marginBottom:12}}>Ready to get started?</h2>
-          <p style={{color:'rgba(255,255,255,.75)',fontSize:16,marginBottom:28}}>Join thousands of patients and doctors using HealthCare+</p>
-          <Link to="/register" className="btn btn-lg" style={{background:'#fff',color:'var(--teal-dark)',fontWeight:800}}>Create Free Account →</Link>
-        </div>
-      </section>
+      {/* NAVBAR */}
+<nav className="bg-white shadow">
+  <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+    <Link to="/" className="text-2xl font-bold text-blue-600">HealthCare+</Link>
+    <div className="flex gap-4">
+      {user ? (
+        <Link to={`/${user.role}/dashboard`}>
+          <Button className="px-6 py-3 text-lg">Dashboard →</Button>
+        </Link>
+      ) : (
+        <>
+          <Link to="/login">
+            <Button variant="outline">Sign In</Button>
+          </Link>
+          <Link to="/register">
+            <Button>Get Started</Button>
+          </Link>
+        </>
+      )}
     </div>
-  );
+  </div>
+</nav>
+      {/* HERO */}
+      <section className="bg-gray-50 py-24">
+        <div className="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12">
+          <div className="flex-1 space-y-6">
+            <h1 className="text-5xl font-bold leading-tight">Your Trusted Digital Healthcare Platform</h1>
+            <p className="text-lg text-gray-700">
+              Book appointments, view lab reports, consult verified doctors, and manage your health securely from one platform.
+            </p>
+            <div className="flex gap-4">
+              <Link to="/register">
+                <Button className="px-6 py-3 text-lg">Get Started</Button>
+              </Link>
+              <Link to="/login">
+                <Button variant="outline" className="px-6 py-3 text-lg">Sign In</Button>
+              </Link>
+            </div>
+          </div>
+          <div className="flex-1 flex justify-center">
+            <Card className="w-64 h-64 flex items-center justify-center bg-blue-100">
+              <Stethoscope className="w-16 h-16 text-blue-600" />
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {services.map((s) => (
+              <Card key={s.title} className="text-center p-6 space-y-4">
+                <div className="flex justify-center">{s.icon}</div>
+                <h3 className="text-lg font-semibold">{s.title}</h3>
+                <Button variant="outline" className="w-full">View Details</Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DOCTORS */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">Our Doctors</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {doctors.map((d) => (
+              <Card key={d.name} className="text-center p-6 space-y-4">
+                <Avatar className="mx-auto w-20 h-20">
+                  <AvatarFallback>{d.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                </Avatar>
+                <h3 className="text-lg font-semibold">{d.name}</h3>
+                <p className="text-gray-500">{d.dept}</p>
+                <Button variant="outline" className="w-full">View Profile</Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">What Our Patients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t) => (
+              <Card key={t.name} className="p-6">
+                <CardContent>
+                  <p className="italic text-gray-700">"{t.text}"</p>
+                  <p className="mt-4 font-semibold">{t.name}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+   {/* FINAL CTA */}
+<section className="py-28 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center">
+  <div className="container mx-auto px-6 space-y-6">
+    <h2 className="text-5xl font-extrabold leading-tight">Take Control of Your Health Today</h2>
+    <p className="text-xl text-gray-200 max-w-xl mx-auto">
+      Join thousands of patients managing their health securely and efficiently with our platform.
+    </p>
+    <Link to="/register">
+      <Button className="px-10 py-4 text-lg bg-black text-black-600 font-semibold rounded-lg hover:bg-white-100 transition-all duration-300">
+  Create Free Account
+</Button>
+    </Link>
+  </div>
+</section>
+
+{/* FOOTER */}
+<footer className="bg-gray-900 text-gray-300 py-16">
+  <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+    {/* Contact */}
+    <div>
+      <h4 className="font-semibold text-lg mb-4 text-white">Contact</h4>
+      <p>Chattogram, Bangladesh</p>
+      <p>Phone: 01800000000</p>
+      <p>Email: support@healthcareplus.com</p>
+    </div>
+
+    {/* Services */}
+    <div>
+      <h4 className="font-semibold text-lg mb-4 text-white">Services</h4>
+      <ul className="space-y-2">
+        <li className="hover:text-white transition-colors cursor-pointer">Appointments</li>
+        <li className="hover:text-white transition-colors cursor-pointer">Doctors</li>
+        <li className="hover:text-white transition-colors cursor-pointer">Lab Reports</li>
+        <li className="hover:text-white transition-colors cursor-pointer">Prescriptions</li>
+      </ul>
+    </div>
+
+    {/* Legal */}
+    <div>
+      <h4 className="font-semibold text-lg mb-4 text-white">Legal</h4>
+      <ul className="space-y-2">
+        <li className="hover:text-white transition-colors cursor-pointer">Privacy Policy</li>
+        <li className="hover:text-white transition-colors cursor-pointer">Terms of Service</li>
+      </ul>
+    </div>
+
+    {/* Social */}
+    <div>
+      <h4 className="font-semibold text-lg mb-4 text-white">Follow Us</h4>
+      <div className="flex gap-4">
+        <a href="#" className="hover:text-white transition-colors"><Users className="w-6 h-6"/></a>
+        <a href="#" className="hover:text-white transition-colors"><Activity className="w-6 h-6"/></a>
+        <a href="#" className="hover:text-white transition-colors"><Stethoscope className="w-6 h-6"/></a>
+        <a href="#" className="hover:text-white transition-colors"><FileText className="w-6 h-6"/></a>
+      </div>
+    </div>
+  </div>
+
+  <p className="text-center mt-12 text-gray-500">&copy; 2026 HealthCare Platform. All rights reserved.</p>
+</footer>
+</div> ); 
 }
